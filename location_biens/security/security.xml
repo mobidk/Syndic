@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="acces_module_location_bien" model="res.groups">
+            <field name="name">Acces Bien</field>
+        </record>
+        <record id="acces_module_location_locataire" model="res.groups">
+            <field name="name">Acces Locataire</field>
+        </record>
+        <record id="acces_module_location_type" model="res.groups">
+            <field name="name">Acces Type</field>
+        </record>
+
+
+
+
+        <record id="acces_module_location_etat_des_lieux" model="res.groups">
+            <field name="name">Acces etat des lieux</field>
+        </record>
+        <record id="acces_module_location_enregistrementetat" model="res.groups">
+            <field name="name">Acces enregistrement etat</field>
+        </record>
+	        <record id="acces_module_location_proprietaire" model="res.groups">
+            <field name="name">Acces proprietaire</field>
+        </record>
+	    <record id="acces_module_locataire_potentiel" model="res.groups">
+            <field name="name">Acces Locataire Potentiel</field>
+        </record>
+	    <record id="acces_module_contact" model="res.groups">
+            <field name="name">Acces Contact</field>
+        </record>
+	    <record id="acces_module_quartier" model="res.groups">
+            <field name="name">Acces Quartier</field>
+        </record>
+	    <record id="acces_module_ville" model="res.groups">
+            <field name="name">Acces Ville</field>
+        </record>
+    </data>
+</odoo>

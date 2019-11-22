@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Locataires Potentiels form view -->
+
+		<record model="ir.ui.view" id="locataires_potentiels_form_view">
+            <field name="name">locataire_potentiel.form</field>
+            <field name="model">lb.locataire_potentiel</field>
+            <field name="arch" type="xml">
+                <form string="Locataire Potentiel Form">
+                    <sheet>
+                    <div class="oe_title">
+                        <field name="company_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>
+                        <h1>
+                        <field name="nom" default_focus="1" placeholder="Nom Complet"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="civilite" options="{&quot;no_open&quot;: True}" attrs="{'invisible': [('company_type', '=', 'societe')]}"/>
+							<field name="quartier_souhaitee"/>
+                            <field name="currency_id" invisible="1"/>
+							<field name="budget" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="email" widget="email"/>
+                            <field name="telephone" widget="phone"/>
+                            <field name="notes" placeholder="note interne..."/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Locataires Potentiels tree view -->
+
+        <record model="ir.ui.view" id="locataires_potentiels_tree_view">
+            <field name="name">locataire_potentiel.tree</field>
+            <field name="model">lb.locataire_potentiel</field>
+            <field name="arch" type="xml">
+                <tree string="Locataire Potentiel Tree">
+                    <field name="company_type"/>
+                    <field name="nom"/>
+                    <field name="quartier_souhaitee"/>
+                    <field name="budget"/>
+                    <field name="telephone"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Locataires Potentiels search view -->
+        <record id="view_locataire_potentiel_filter" model="ir.ui.view">
+            <field name="name">Rechercher Locataire Potentiel</field>
+            <field name="model">lb.locataire_potentiel</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Locataire Potentiel">
+                    <field name="company_type"/>
+                    <field name="nom"/>
+                    <field name="quartier_souhaitee"/>
+                    <field name="telephone"/>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="locataire_potentiel_list_action">
+            <field name="name">Locataires Potentiels</field>
+            <field name="res_model">lb.locataire_potentiel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_locataire_potentiel_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouveau Locataire potentiel
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="locataire_potentiel_menu" name="Locataires Potentiels"
+                  parent="locataire_menu"
+                  action="locataire_potentiel_list_action"/>
+
+    </data>
+</odoo>

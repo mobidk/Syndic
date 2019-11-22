@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Biens form view -->
+        <record model="ir.ui.view" id="bien_form_view">
+            <field name="name">bien.form</field>
+            <field name="model">lb.bien</field>
+            <field name="arch" type="xml">
+                <form string="Bien Form">
+                    <sheet>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                            <field string="Images" name="doc_count" widget="statinfo"/>
+                        </button>
+					</div>
+                        <group>
+                            <group>
+								<field name="bailleur_id"/>
+							<label for="Rue" string="Adresse"/>
+                            <div class="o_address_format">
+                                <field name="rue" placeholder="Adresse ..." class="o_address_street"/>
+                                <field name="quartier" placeholder="Quartier"/><br></br>
+                                <field name="code_postale" placeholder="Code Postale"/><br></br>
+                                <field name="ville" placeholder="Ville" class="o_address_city"/><br></br>
+                                <field name="pays" placeholder="Pays" class="o_address_country"/>
+                            </div>
+                            </group>
+                            <group>							
+								<field name="type_id"/>
+								<label for="superficie"/>
+								<div class="o_row" name="superficie">
+									<field name="superficie"/>
+									<span>m²</span>
+								</div>
+								<field name="reference"/>
+                                    <field name="currency_id" invisible="1"/>
+								<field name="description"/>
+								<field name="prix_location" widget="monetary"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Notes">
+                                <group>
+									<field name="notes"/>
+								</group>
+							</page>
+						</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Biens tree view -->
+
+        <record model="ir.ui.view" id="bien_tree_view">
+            <field name="name">bien.tree</field>
+            <field name="model">lb.bien</field>
+            <field name="arch" type="xml">
+                <tree string="Bien Tree">
+                    <field name="type_id"/>
+                    <field name="rue" string="Adresse"/>
+                    <field name="bailleur_id"/>
+                    <field name="quartier"/>
+                    <field name="ville"/>
+                    <field name="pays"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Biens search view -->
+
+        <record id="view_bien_filter" model="ir.ui.view">
+            <field name="name">Rechercher Bien</field>
+            <field name="model">lb.bien</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Bien">
+                    <field name="bailleur_id"/>
+                    <field name="type_id"/>
+                    <field name="rue"/>
+                    <field name="reference"/>
+                    <field name="ville"/>
+                    <field name="pays"/>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="bien_list_action">
+            <field name="name">Biens</field>
+            <field name="res_model">lb.bien</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_bien_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouveau Bien
+                </p>
+            </field>
+        </record>
+		
+        <!-- Type_Bien form view -->
+
+        <record model="ir.ui.view" id="type_form_view">
+            <field name="name">type.form</field>
+            <field name="model">lb.type</field>
+            <field name="arch" type="xml">
+                <form string="Type Form">
+                    <sheet>
+                        <group>
+                            <field name="type"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="type_tree_view">
+            <field name="name">type.tree</field>
+            <field name="model">lb.type</field>
+            <field name="arch" type="xml">
+                <tree string="Type Tree">
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="type_list_action">
+            <field name="name">Types des Biens</field>
+            <field name="res_model">lb.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouveau Type
+                </p>
+            </field>
+        </record>
+
+
+
+        <menuitem id="main_rental_app_menu" name="gestion des Biens"/>
+        <menuitem id="rental_app_menu" name="gestion des Biens"
+                  parent="main_rental_app_menu"/>
+        <menuitem id="bien_menu" name="Biens"
+                  parent="rental_app_menu" sequence="3"/>
+        <menuitem id="bien_bien_menu" name="Biens"
+                  parent="bien_menu" sequence="2"
+                  action="bien_list_action"/>
+        <menuitem id="type_menu" name="Types des Biens"
+                  parent="bien_menu"
+                  action="type_list_action" sequence="1"/>
+
+
+    </data>
+</odoo>

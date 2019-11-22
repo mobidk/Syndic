@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+normal_user,Normal User,model_lb_bien,,1,1,1,1
+normal_user1,Normal User,model_lb_type,,1,1,1,1
+normal_user5,Normal User,model_lb_location,,1,1,1,1
+
+normal_user7,Normal User,model_lb_etat_des_lieux,,1,1,1,1
+normal_user8,Normal User,model_lb_enregistrement_etat_des_lieux,,1,1,1,1
+normal_user9,Normal User,model_lb_bailleur,,1,1,1,1
+normal_user10,Normal User,model_lb_locataire_potentiel,,1,1,1,1
+normal_user11,Normal User,model_lb_ville,,1,1,1,1
+normal_user12,Normal User,model_lb_quartier,,1,1,1,1
+
+

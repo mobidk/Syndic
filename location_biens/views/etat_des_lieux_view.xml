@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Etat des lieux form view -->
+
+		<record model="ir.ui.view" id="etat_des_lieux_form_view">
+            <field name="name">etatdeslieux.form</field>
+            <field name="model">lb.etat_des_lieux</field>
+            <field name="arch" type="xml">
+                <form string="Etat des lieux Form">
+                    <sheet>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                            <field string="Images" name="doc_count" widget="statinfo"/>
+                        </button>
+					</div>
+                    <group>
+                        <group>
+                            <field name="etat_des_lieux_type"/>
+                            <field name="date_etat_des_lieux"/>
+                            <field name="ref_etat_des_lieux"/>
+                            <field name="location"/>
+                            <field name="etat_des_lieux_entree_associe" attrs="{'invisible': [('etat_des_lieux_type', '=', 'entree')]}"/>
+                        </group>
+                        <group>
+                            <field name="notes" placeholder="note interne..."/>
+                        </group>
+                    </group>
+                        <notebook>
+                            <page string="Etat des lieux">
+                                <field name="enregistrement_etat_des_lieux">
+                                    <tree string="Etat des lieux">
+                                        <field name="nom_piece"/>
+                                        <field name="Etat"/>
+                                    </tree>
+                                </field>
+							</page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Etat des lieux tree view -->
+
+        <record model="ir.ui.view" id="etat_des_lieux_tree_view">
+            <field name="name">etatdeslieux.tree</field>
+            <field name="model">lb.etat_des_lieux</field>
+            <field name="arch" type="xml">
+                <tree string="Etat des lieux Tree">
+                    <field name="etat_des_lieux_type"/>
+                    <field name="date_etat_des_lieux"/>
+                    <field name="location"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Etat des lieux search view -->
+        <record id="view_etat_des_lieux_filter" model="ir.ui.view">
+            <field name="name">Rechercher Etat des lieux</field>
+            <field name="model">lb.etat_des_lieux</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Etat des lieux">
+                    <field name="etat_des_lieux_type"/>
+                    <field name="date_etat_des_lieux"/>
+                    <field name="location"/>
+                    <field name="ref_etat_des_lieux"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="etat_des_lieux_list_action">
+            <field name="name">Etat des lieux</field>
+            <field name="res_model">lb.etat_des_lieux</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_etat_des_lieux_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer un nouvel état des lieux
+                </p>
+            </field>
+        </record>
+
+        <!-- Enregistrement Etat des lieux form view -->
+
+        <record model="ir.ui.view" id="enregistrement_etat_des_lieux_form_view">
+            <field name="name">enregistrement_etat_des_lieux.form</field>
+            <field name="model">lb.enregistrement_etat_des_lieux</field>
+            <field name="arch" type="xml">
+                <form string="Enregistrement Etat des lieux Form">
+                    <sheet>
+					<group>
+                        <group>
+                            <field name="nom_piece"/>
+                            <field name="Etat"/>
+                            <field name="commentaires"/>
+                        </group>
+					</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		
+		
+
+        <record model="ir.actions.act_window" id="garant_list_action">
+            <field name="name">Enregistrement Etat des lieux</field>
+            <field name="res_model">lb.enregistrement_etat_des_lieux</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="etat_des_lieux_menu" name="Etat des lieux"
+                  parent="rental_app_menu"
+                  action="etat_des_lieux_list_action" sequence="6"/>
+
+
+    </data>
+</odoo>

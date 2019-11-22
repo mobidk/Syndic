@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Locations form view -->
+        <record model="ir.ui.view" id="location_form_view">
+            <field name="name">location.form</field>
+            <field name="model">lb.location</field>
+            <field name="arch" type="xml">
+                <form string="Location Form">
+                    <sheet>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                            <field string="Contrats" name="doc_count" widget="statinfo"/>
+                        </button>
+					</div>
+					<group>
+                        <group>
+                            <field name="bien_loue"/>
+                            <field name="locataires"/>
+                            <field name="utilisation"/>
+                            <field name="date_quittancement"/>
+                        </group>
+                        <group>
+                            <field name="ref_location"/>
+                            <field name="debut_bail"/>
+                            <field name="fin_bail"/>
+                            <field name="paiement"/>
+                            <field name="statut_location"/>
+                        </group>
+					</group>
+                        <notebook>
+                            <page string="Loyer">
+                                <group>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="loyer_sans_charges" widget="monetary"/>
+                                    <field name="charges_loyer" widget="monetary"/>
+                                    <field name="loyer_avec_charges" widget="monetary"/>
+								</group>
+							</page>
+                            <page string="Autre Paiements">
+                                <group>
+									<field name="frais_retard" placeholder="Information à titre indicatif"/>
+                                </group>
+                                <group>
+									<label for="autre_paiement" string="Autre Paiements"/>
+										<div>
+											<field name="description_autre_paiement" placeholder="Description"/>
+											<field name="autre_paiement" widget="monetary" placeholder="Montant"/>
+										</div>
+								</group>
+							</page>
+                            <page string="Conditions Particulières">
+                                <group>
+									<field name="condition_particuliere"/>
+								</group>
+							</page>
+                            <page string="Enregistrement des paiements">
+                                <group>
+									<field name="locataire_a_jour" attrs="{'invisible': [('statut_location', '=', 'inactif')]}"/>
+                                    <field name="currency_id" invisible="1"/>
+									<field name="reste_a_payer" widget="monetary" attrs="{'invisible':['|',('locataire_a_jour','=','oui'),('statut_location','=','inactif')]}"/> 									
+
+								</group>
+                                <field name="enregistrement_paiement">
+                                    <tree string="Enregistrement des paiements" editable="bottom">
+                                        <field name="date_paiement"/>
+                                        <field name="objet_paiement"/>
+                                        <field name="periode_paye_debut"/>
+                                        <field name="periode_paye_fin"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="montant_paye" widget="monetary" sum="Total"/>
+                                        <field name="commentaire_paiement"/>
+                                    </tree>
+                                </field>
+                            </page>
+						</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Locations tree view -->
+
+        <record model="ir.ui.view" id="location_tree_view">
+            <field name="name">location.tree</field>
+            <field name="model">lb.location</field>
+            <field name="arch" type="xml">
+                <tree string="Location Tree">
+                    <field name="statut_location"/>
+                    <field name="locataires"/>
+                    <field name="bien_loue" string="Adresse du bien"/>
+                    <field name="loyer_avec_charges" string="Loyer"/>
+                    <field name="utilisation"/>
+                    <field name="debut_bail"/>
+                    <field name="fin_bail"/>
+                    <field name="locataire_a_jour" string="Le locataire est-il à jour ?"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Locations search view -->
+        <record id="view_location_filter" model="ir.ui.view">
+            <field name="name">Rechercher Location</field>
+            <field name="model">lb.location</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Location">
+                    <field name="bien_loue"/>
+                    <field name="locataires"/>
+                    <field name="utilisation"/>
+                    <field name="debut_bail"/>
+                    <field name="fin_bail"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="location_list_action">
+            <field name="name">Locations</field>
+            <field name="res_model">lb.location</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_location_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Créer une nouvelle location
+                </p>
+            </field>
+        </record>
+		
+        <menuitem id="location_menu" name="Locations"
+                  parent="rental_app_menu"
+                  action="location_list_action" sequence="5"/>
+
+
+    </data>
+</odoo>
